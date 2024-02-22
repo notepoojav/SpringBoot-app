@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kumbh Sans', sans-serif;
+
+        }
+
+        body{
+            background: white;
+        }
+        .active{
+            background-color: cadetblue;
+        }
+
+        .navbar {
+            background: black;
+
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 0;
+        }
+
+        .navbar_container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        #navbar_logo {
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #51E1ED 0%, #286783 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .navbar_menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar_item {
+            height: 80px;
+        }
+
+        .navbar_links {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+        .navbar_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background: #f77062;
+            color: #fff;
+        }
+
+        .button:hover {
+            background: #4837ff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar_links:hover {
+            color: #f77062;
+            transition: all 0.3s ease;
+        }
+        .text-1{
+            font-size: 15px;
+            color: black;
+        }
+        .text-2{
+              font-size: 13px;
+              color: darkgrey;
+          }
+
+        .info{
+            line-height: 13px;
+            text-align: center
+        }
+
+        .button-color{
+            background: #6AC47E;
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 12px;
+            transition: all 150ms ease-in-out;
+            box-shadow: 0 0 40px 40px #6AC47E inset, 0 0 0 0 #6AC47E;
+        }
+        .button-color:hover {
+            box-shadow: 0 0 40px 40px #6AC47E inset, 0 0 0 0 #6AC47E;
+            cursor:pointer;
+            padding: 6px 20px;
+            border-radius:5px;
+            border:2px solid #ccc;
+            margin: 0 5px;
+            align-self: center;
+         }
+
+
+        .images{
+            transition: transform .2s;
+
+        }
+
+        .images:hover {
+            -ms-transform: scale(1); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Safari 3-8 */
+            transform: scale(1.5);
+        }
+
+        .myform{
+            display: none;
+            position: fixed;
+            background: white;
+            /*padding: 20px;*/
+            top: 11%;
+            right: 20px;
+            border-radius: 3px;
+            border-color: #141414;
+            height: 600px;
+            width: 800px;
+
+            /*cursor: pointer;*/
+            padding: 10px 25px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 19px;
+            border: 2px solid cadetblue;
+            /*text-transform: uppercase;*/
+            /*transition: .3s;*/
+
+
+        }
+
+        .shopping-cart-header {
+            border-bottom: 2px solid black;
+            padding-bottom: 20px;}
+
+        .shopping-cart-total {
+            float: right;
+            color: #141414;
+
+        }
+
+        .kartDiv{
+            border: 1px solid grey;
+            margin: 3px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar_container">
+        <a id="navbar_logo">EKART / PRODUCTS</a>
+        <ul class="navbar_menu">
+            <li class="navbar_item">
+                <a id="active_user"class="navbar_links" >EKART</a>
+            </li>
+            <li class="navbar_btn">
+                <a style="cursor:pointer;" id="handyCart" class="button" onclick="sideCart()">Cart</a>
+            </li>
+            <li class="navbar_btn">
+                <a style="cursor:pointer;" onclick="logout()" class="button">SignOut</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="main" style="background: white; text-align: center">
+    <div id="button_container" style=" position: fixed;right:50%;bottom: 10px"></div>
+    <div id="container"></div>
+</div>
+
+
+<div id="myform" class="myform" >
+
+    <div class="row">
+        <h4>ITEMS IN CART</h4>
+        </br>
+        <div class="shopping-cart-header">
+            <div class="shopping-cart-total">
+<!--                <span class="lighter-text">Total:</span>-->
+<!--                <span id="cart_total" class="main-color-text">$0</span>-->
+            </div>
+        </div>
+    </div>
+    <div id="kartContainer" style="min-width: 300px; max-height: 400px; overflow: auto; border: none; background: whitesmoke"></div>
+    <button onclick="saveToEkart()" id="saveToKart" style="background: sienna; padding: 10px; color:white;cursor: pointer; border-radius: 5px;margin-top: 5px; float:right;">SAVE CART</button>
+    <span id="error" class="danger" style="color: indianred"></span>
+    <button id="hideform" onclick="hideSideCart()" type="button" style="position: absolute; top : 10px; right: 10px; cursor: pointer; height: 20px;width: 20px; background: saddlebrown"> X </button>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="cookies.js"></script>
+
+<script>
+
+
+    if( getCookie("ekart_key") == undefined ){
+        location.href = "login.html";
+    }
+
+    document.getElementById("active_user").innerText = getCookie("username");
+
+    var requestBody = {
+        "customerName" : getCookie("username"),
+        "sessionkey": getCookie("ekart_key")
+
+    }
+    $.ajax({
+        url:"http://localhost:4001/product/list",
+        data: JSON.stringify( requestBody ),
+        type : 'post',
+        dataType : 'json',
+        contentType : "application/json",
+        cache : false,
+        success : function(response){
+                console.log(response);
+                if(response.status === "success"){
+
+                    var pages = 1;
+                    var divId = "mini"+pages;
+
+                    var miniBlock = "<div id='"+ divId +"' style='margin: 50px; position: center;background: white' class='miniBlock'>";
+
+                    var btn = "<button style='cursor: pointer;padding: 10px; margin: 5px' class='pagination active' onclick='pagination( this ,  "+ pages+")'>"+  pages +"</button>";
+
+                    document.getElementById("button_container").innerHTML += btn;
+
+
+                    for( var i=0; i< response.data.length ; i++){
+
+                        var eachBlock = '<div id="product-'+ response.data[i].productId +'" style="border-radius: 15px;box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);text-align: center; display: inline-block;  padding: 12px; margin: 10px;width: 100%;max-width: 250px;" class="sports">' +
+                            '<h4 class="info">'+ response.data[i].productName +'</h4>' +
+                            '</br>'+
+                            '<img class="images" style="height: 100px; width: 140px;" src="'+ response.data[i].image +'" /><br/>' +
+                            '</br>'+
+                            '<h5 class="text-2"> Desciption : '+ response.data[i].description +'</h5>' +
+                            '<h5 class="text-1"> Price : $'+ response.data[i].price +'</h5>' +
+                            '</br>'+
+                            '<button class="button-color" onclick="addToCart(this)" id="btn-'+ response.data[i].productId +'"  data-id="'+ response.data[i].productId +'" data-name="'+ response.data[i].productName +'" data-quantity="'+ response.data[i].quantity +'"   data-price="'+ response.data[i].price +'" >ADD TO CART</button>' +
+                            '</div>';
+
+
+
+                        miniBlock += eachBlock;
+
+                        if((i+1) % 10 === 0){
+                            miniBlock += "</div>";
+                            document.getElementById("container").innerHTML += miniBlock;
+                            pages++;
+
+                            var divId = "mini"+pages;
+
+                            miniBlock = "<div id='"+ divId +"' style='margin: 10px; background: white; display: none' class='miniBlock'>";
+
+                            var btn = "<button style='cursor: pointer;padding: 10px;  margin: 5px' class='pagination' onclick='pagination( this ,  "+ pages +")'>"+ pages +"</button>";
+
+                            document.getElementById("button_container").innerHTML +=btn;
+
+                        }
+                    }
+                    miniBlock += "</div>";
+                    document.getElementById("container").innerHTML += miniBlock;
+                }
+                else{
+                    alert(response.message);
+                }
+
+            },
+        error: function (){
+            alert("error");
+        }
+    })
+
+    function pagination( btn,  id){
+
+        var allBtns = document.getElementsByClassName("pagination");
+
+        for( var i = 0; i < allBtns.length ; i++ ){
+            allBtns[i].classList.remove("active");
+        }
+
+        btn.classList.add("active");
+
+        for(var i = 0; i < document.getElementsByClassName("miniBlock").length; i++ ){
+            document.getElementsByClassName("miniBlock")[i].style.display = "none";
+        }
+
+        var divID = "mini"+id;
+        document.getElementById( divID ).style.display = "block";
+    }
+
+    function addToCart(btn){
+
+        btn.setAttribute("disabled", true);
+
+        var cartDiv = '<div id="cart-'+ $(btn).data("id") +'" data-id="'+ $(btn).data("id") +'" data-name="'+ $(btn).data("name") +'" data-price="'+ $(btn).data("price") +'"   class="kartDiv"> '+
+            '<b>'+ $(btn).data("name") +'</b><br/>' +
+            'Amount : $'+ $(btn).data("price") +'<br/>' +
+            'Quantity : <input type="number" value="1" class="quantity" /></br>'+
+            '<button style="cursor: pointer; padding: 2px 8px;background: darkolivegreen;border-radius: 5px; color: white" onclick="restore('+ $(btn).data("id") +')">Remove</button>' +
+            '</div> ';
+
+
+        document.getElementById("kartContainer").innerHTML += cartDiv;
+    }
+
+    function restore(id){
+        console.log();
+
+        document.getElementById( "btn-" + id).removeAttribute("disabled");
+        document.getElementById("cart-"+ id).remove();
+    }
+
+
+    isFormVisible = false;
+
+    function sideCart(){
+
+        if( isFormVisible ){
+            document.getElementById("myform").style.display = "none";
+            isFormVisible = false;
+
+
+        } else {
+            document.getElementById("myform").style.display = "block";
+            isFormVisible = true;
+        }
+    }
+
+    function hideSideCart(){
+        document.getElementById("myform").style.display = "none";
+        isFormVisible = false;
+    }
+
+    function saveToEkart(){
+
+
+        var cartDivElements = document.getElementsByClassName("kartDiv");
+        console.log(cartDivElements);
+
+        var productsInMyCart = [];
+
+        for(var i=0; i< cartDivElements.length; i++){
+            var product = {};
+
+            product.productId = cartDivElements[i].getAttribute("data-id");
+            product.productName = cartDivElements[i].getAttribute("data-name");
+            product.quantity = parseInt( cartDivElements[i].getElementsByClassName("quantity")[0].value )
+            product.orderId = 0;
+            product.price = cartDivElements[i].getAttribute("data-price");
+            product.amount = product.quantity * parseInt(cartDivElements[i].getAttribute("data-price"));
+            product.username = getCookie("username");
+
+            productsInMyCart.push(product);
+
+        }
+        console.log(productsInMyCart);
+
+        var requestBody = {
+            "customerName" : getCookie("username"),
+            "sessionkey": getCookie("ekart_key"),
+            "data" : productsInMyCart
+        }
+
+        $.ajax({
+            url:"http://localhost:4001/cart/add",
+            data: JSON.stringify( requestBody ),
+            type : 'post',
+            dataType : 'json',
+            contentType : "application/json",
+            cache : false,
+            success : function(response){
+                console.log(requestBody);
+                location.href="orders.html"
+            },
+            error: function (){
+                console.log("error happened");
+            }
+        });
+
+    }
+
+
+
+
+
+</script>
+
+</body>
+</html>

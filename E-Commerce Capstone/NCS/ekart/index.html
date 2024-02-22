@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EKART</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kumbh Sans', sans-serif;
+        }
+
+        .navbar {
+            background: black;
+
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar_container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        #navbar_logo {
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .navbar_menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar_item {
+            height: 80px;
+        }
+
+        .navbar_links {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+
+        .navbar_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background: #f77062;
+            color: #fff;
+        }
+
+        .button:hover {
+            background: #4837ff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar_links:hover {
+            color: #f77062;
+            transition: all 0.3s ease;
+        }
+
+        .main{
+            background-color: #141414;
+        }
+
+        .main_container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            justify-self: center;
+            margin: 0 auto;
+            height: 99vh;
+            background-color: #131313;
+            z-index:1;
+            width:100%;
+            max-width:1300px;
+            padding-right:50px;
+            padding-left:50px;
+        }
+
+        .main_content{
+            color:#fff;
+            width:100%;
+        }
+
+        .main_content h1{
+            font-size: 4rem;
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color:transparent;
+        }
+
+        .main_content h2 {
+            font-size: 3.5rem;
+            margin-top: 10px;
+            background-color: #ff8177;
+            background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+        }
+
+        .main_content p {
+            margin-top: 1rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .main_btn{
+            font-size: 1rem;
+            background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+            padding: 14px 32px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            margin-top: 2rem;
+            cursor:pointer;
+            position: relative;
+            transition: all 0.35s;
+            outline: none;
+        }
+        .main_btn a {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .main_btn:after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #4837ff;
+            transition: all 0.35s;
+            border-radius: 4px;
+        }
+
+        .main_btn:hover {
+            color: #fff;
+        }
+
+        .main_btn:hover:after {
+            width: 100%;
+        }
+
+        .main_img_container {
+            text-align: center;
+        }
+
+        #main_img {
+            height: 80%;
+            width: 80%;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar_container">
+<!--        <img src="images/pic3.svg" style="width: 16px;height: 16px">-->
+        <a href="index.html" id="navbar_logo">EKART</a>
+        <div class="navbar_toggle" id="mobile-menu">
+            <span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar_menu">
+
+            <li class="navbar_item">
+                <a onclick="myAlert()" class="navbar_links">Products</a>
+            </li>
+            <li class="navbar_btn">
+                <a href="registration.html" class="button">SignUP</a>
+            </li>
+            <li class="navbar_btn">
+                <a href="login.html" class="button">Login</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<!--MAIN SECTION-->
+<div class="main">
+    <div class="main_container">
+        <div class="main_content">
+            <h1>EKART</h1>
+            <h2>SHOPPING STORE</h2>
+            <p>ITEMS AVAILABLE AS YOU NEED</p>
+            <button class="main_btn">
+                <a>Get Started</a>
+            </button>
+        </div>
+        <div class="main_img_container">
+            <img id="main_img" src="images/pic2.svg"/>
+        </div>
+    </div>
+</div>
+<script>
+    function myAlert(){
+        alert("You have to sign in first !");
+    }
+</script>
+
+</body>
+</html>

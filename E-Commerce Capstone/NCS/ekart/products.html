@@ -1,0 +1,269 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Products Of Ekart</title>-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+
+<!--    <style>-->
+<!--        * {-->
+<!--            box-sizing: border-box;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            font-family: 'Kumbh Sans', sans-serif;-->
+<!--        }-->
+
+<!--        .navbar {-->
+<!--            background: black;-->
+<!--            height: 80px;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            font-size: 1.2rem;-->
+<!--            position: sticky;-->
+<!--            top: 0;-->
+<!--            z-index: 999;-->
+<!--        }-->
+
+<!--        .navbar_container {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            height: 80px;-->
+<!--            z-index: 1;-->
+<!--            width: 100%;-->
+<!--            max-width: 1300px;-->
+<!--            margin-right: auto;-->
+<!--            margin-left: auto;-->
+<!--            padding-right: 50px;-->
+<!--            padding-left: 50px;-->
+<!--        }-->
+
+<!--        #navbar_logo {-->
+<!--            background-color: #ff8177;-->
+<!--            background-image: linear-gradient(to top, #51E1ED 0%, #286783 100%);-->
+<!--            background-size: 100%;-->
+<!--            -webkit-background-clip: text;-->
+<!--            -moz-background-clip: text;-->
+<!--            -webkit-text-fill-color: transparent;-->
+<!--            -moz-text-fill-color: transparent;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            cursor: pointer;-->
+<!--            text-decoration: none;-->
+<!--            font-size: 2rem;-->
+<!--        }-->
+<!--        .navbar_menu {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            list-style: none;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .navbar_item {-->
+<!--            height: 80px;-->
+<!--        }-->
+
+<!--        .navbar_links {-->
+<!--            color: #fff;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            text-decoration: none;-->
+<!--            padding: 0 1rem;-->
+<!--            height: 100%;-->
+<!--        }-->
+<!--        .navbar_btn {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            padding: 0 1rem;-->
+<!--            width: 100%;-->
+<!--        }-->
+
+<!--        .button {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            text-decoration: none;-->
+<!--            padding: 10px 20px;-->
+<!--            height: 100%;-->
+<!--            width: 100%;-->
+<!--            border: none;-->
+<!--            outline: none;-->
+<!--            border-radius: 4px;-->
+<!--            background: #f77062;-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        .button:hover {-->
+<!--            background: #4837ff;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .navbar_links:hover {-->
+<!--            color: #f77062;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+
+<!--        /*services css*/-->
+
+<!--        .services{-->
+<!--            display:grid;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            height: 50vh;-->
+<!--        }-->
+
+<!--        .services h1 {-->
+<!--            background-color: #ff8177;-->
+<!--            background-image: linear-gradient(-->
+<!--                    to right,-->
+<!--                    #ff8177 0%,-->
+<!--                    #ff867a 0%,-->
+<!--                    #ff8c7f 21%,-->
+<!--                    #f99185 52%,-->
+<!--                    #cf556c 78%,-->
+<!--                    #b12a5b 100%-->
+<!--            );-->
+<!--            background-size: 100%;-->
+<!--            -webkit-background-clip: text;-->
+<!--            -moz-background-clip: text;-->
+<!--            -webkit-text-fill-color: transparent;-->
+<!--            -moz-text-fill-color: transparent;-->
+<!--            margin-bottom: 5rem;-->
+<!--            font-size: 2.5rem;-->
+<!--        }-->
+
+<!--        .services_container {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            flex-wrap: wrap;-->
+<!--        }-->
+
+<!--        .service_card{-->
+<!--            margin:1rem;-->
+<!--            height: 300px;-->
+<!--            width:300px;-->
+<!--            border-radius:4px;-->
+<!--            background-image: linear-gradient(-->
+<!--                    to bottom,-->
+<!--                    rgba(0,0,0,0) 0%,-->
+<!--                    rgba(17,17,17,0.6) 100%-->
+<!--            ),-->
+<!--            url("https://i.pinimg.com/474x/73/a6/dd/73a6dd3c8bfc6c2f5aa1695a47afb58b.jpg");-->
+<!--            background-size: cover;-->
+<!--            position: relative;-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        .service_card:before {-->
+<!--            opacity: 0.2;-->
+<!--        }-->
+
+<!--        .service_card:nth-child(2) {-->
+<!--            background-image: linear-gradient(-->
+<!--                    to bottom,-->
+<!--                    rgba(0, 0, 0, 0) 0%,-->
+<!--                    rgba(17, 17, 17, 0.9) 100%-->
+<!--            ),-->
+<!--            url('https://i.pinimg.com/474x/cf/dc/4a/cfdc4a1b70a6f35a27a0ccef5cfc02e1.jpg');-->
+<!--        }-->
+
+<!--        .service_card:nth-child(3) {-->
+<!--            background-image: linear-gradient(-->
+<!--                    to bottom,-->
+<!--                    rgba(0, 0, 0, 0) 0%,-->
+<!--                    rgba(17, 17, 17, 0.9) 100%-->
+<!--            ),-->
+<!--            url('https://i.pinimg.com/474x/e2/e5/c2/e2e5c2d4046cd7551d440bde99bf8c84.jpg');-->
+<!--        } .service_card:nth-child(4) {-->
+<!--              background-image: linear-gradient(-->
+<!--                      to bottom,-->
+<!--                      rgba(0, 0, 0, 0) 0%,-->
+<!--                      rgba(17, 17, 17, 0.9) 100%-->
+<!--              ),-->
+<!--              url('https://i.pinimg.com/474x/d7/05/fd/d705fd0edfce45e23330d5cd5d0aecf6.jpg');-->
+<!--          }-->
+
+<!--        .service_card h2 {-->
+<!--            position: absolute;-->
+<!--            top: 320px;-->
+<!--            left: 30px;-->
+<!--            color: cadetblue;-->
+<!--                    }-->
+
+<!--        .service_card button {-->
+<!--            color: #fff;-->
+<!--            padding: 10px 20px;-->
+<!--            border: none;-->
+<!--            outline: none;-->
+<!--            border-radius: 4px;-->
+<!--            background: #f77062;-->
+<!--            position: absolute;-->
+<!--            top: 360px;-->
+<!--            left: 30px;-->
+<!--            font-size: 1rem;-->
+<!--        }-->
+
+<!--        .service_card button:hover {-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        .service_card:hover {-->
+<!--            transform: scale(1.075);-->
+<!--            transition: 0.2s ease-in;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--    <nav class="navbar">-->
+<!--        <div class="navbar_container">-->
+<!--            <a href="index.html" id="navbar_logo">EKART</a>-->
+<!--            <ul class="navbar_menu">-->
+
+<!--                <li class="navbar_item">-->
+<!--                    <a href="index.html" class="navbar_links">Home</a>-->
+<!--                </li>-->
+
+<!--                <li class="navbar_btn">-->
+<!--                    <a href="index.html" class="button">SignOut</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </nav>-->
+
+
+<!--    <div class="services">-->
+<!--        <div class="services_container">-->
+<!--            <div class="service_card">-->
+<!--                <h2>LIFESTYLE</h2>-->
+<!--                <button onclick="lifestyle()">Get started</button>-->
+<!--            </div>-->
+<!--            <div class="service_card">-->
+<!--                <h2>GADGETS</h2>-->
+<!--                <button onclick="gadgets()">Get started</button>-->
+<!--            </div>-->
+<!--            <div class="service_card">-->
+<!--                <h2>SPORTS</h2>-->
+<!--                <button onclick="sports()">Get started</button>-->
+<!--            </div> <div class="service_card">-->
+<!--            <h2>EXPLORE ALL</h2>-->
+<!--            <button onclick="productsPage()">Get started</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--<script>-->
+<!--    function productsPage(){-->
+<!--        var search = "life";-->
+<!--        location.href = "home.html";-->
+<!--        setCookie("extradata",search);          }-->
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

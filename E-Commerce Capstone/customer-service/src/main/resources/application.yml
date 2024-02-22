@@ -1,0 +1,13 @@
+server:
+  port: 4001
+
+#spring:
+#  cloud:
+#    gateway:
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:63343"
+#            allowedHeaders: "*"
+#            allowedMethods:
+#              - POST

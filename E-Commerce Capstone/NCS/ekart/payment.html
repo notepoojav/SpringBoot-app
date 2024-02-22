@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products Of Ekart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kumbh Sans', sans-serif;
+        }
+
+        .navbar {
+            background: black;
+
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar_container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        #navbar_logo {
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #51E1ED 0%, #286783 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .navbar_menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar_item {
+            height: 80px;
+        }
+
+        .navbar_links {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+        .navbar_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background: #f77062;
+            color: #fff;
+        }
+
+        .button:hover {
+            background: #4837ff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar_links:hover {
+            color: #f77062;
+            transition: all 0.3s ease;
+        }
+        .icon-container{
+            /*margin-bottom: 20px;*/
+            /*padding: 7px 0;*/
+            font-size: 2px;
+        }
+        .cardHead{
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+        }
+
+        . payment_head{
+            /*background-color: #00b0ff;*/
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 14px 0 10px 49px;
+            letter-spacing: 1px;
+            margin-left: -52px;
+            width: 330px;
+            background: wheat;
+        }
+        ::placeholder {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-input{
+            color: white;
+            background-color: #CAD5E2;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            height: 50px;
+            padding-left: 20px;
+            vertical-align: middle;
+        }
+        .main_container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            justify-self: center;
+            margin: 0 auto;
+            height: 99vh;
+            z-index:1;
+            width:100%;
+            max-width:1300px;
+            padding-right:50px;
+            padding-left:50px;
+        }
+
+        .errorInRed{
+            color: indianred;
+            font-style: italic;
+        }
+
+        .btn{
+            margin:30px;
+            cursor: pointer;
+            padding: 10px 20px;
+            background: #207398;
+            color: whitesmoke;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.5s ease;
+        }
+
+        .loader{
+
+            height: 50px;
+            width : 50px;
+            background: transparent;
+            border-radius: 50%;
+            border : 4px solid green;
+            border-top-color: transparent;
+            animation: animate 1s 0.4s linear infinite;
+            position: center;
+        }
+        @keyframes animate {
+            100%{
+                transform: rotate(360deg);
+            }
+
+        }
+
+        .finished{
+            height: 10px;
+            width: 10px;
+            border: none;
+            background: whitesmoke;
+            position: relative;
+            animation: special 1s ease-in;
+        }
+
+        .finished:before{
+            content: url("https://www.pngmart.com/files/3/Green-Tick-Transparent-Background.png");
+            position: absolute;
+            top: 50%;
+            left:50%;
+            transform : translate(-65%,-50%);
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar_container">
+            <a href="index.html" id="navbar_logo">EKART / PAYMENT </a>
+            <ul class="navbar_menu">
+
+                <li class="navbar_item">
+                    <a id="username" class="navbar_links">Ekart</a>
+                </li>
+
+                <li class="navbar_btn">
+                    <a onclick="logout()" class="button">SignOut</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main_container">
+        <div class="main_img_container">
+            <img id="main_img" src="images/pic4.svg" style="height: 60%;width: 60%"/>
+        </div>
+        <div class="cards_main" style="background: whitesmoke; margin-top: 0px;width: 100%;border-radius: 15px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;">
+
+            <h2 class="payment_head" style="margin:20px">PAYMENT</h2>
+
+            <span id="error-cardchoice" class="errorInRed"></span>
+
+            <div id="cardsContainer" style="border : 1px solid black ;padding: 10px; margin: 20px;box-shadow: 3px 3px 5px #D3D3D3;">
+                <label><input type="radio" checked name="cardselection" value="newCard" onclick="newCard('TRUE')"/>Add New Card</label> <br/><br/>
+            </div>
+            <div id="newCard" style="display:none; border: 1px solid black; box-shadow: 3px 3px 5px #D3D3D3; padding: 10px; margin: 20px">
+                <h5 class="cardHead">ENTER CARD DETAILS</h5></br>
+                <span id="error" class="errorInRed"></span></br>
+
+                <p class="text mb-1">Cardholder Name <span class="errorInRed">*</span></p>
+                <input class="form-input" type="text" id="name" placeholder="cardholder" /></br></br>
+
+                <p class="text mb-1">Card Number <span class="errorInRed">*</span> </p>
+                <input class="form-input" type="number" maxlength="16" minlength="16" id="cardnumber" placeholder="**** **** **** ****" /></br></br>
+
+                <p class="text mb-1">Card Type <span class="errorInRed">*</span> </p>
+                <select id="type">
+                    <option selected value="CreditCard">Credit Card</option>
+                    <option value="DebitCard">Debit Card</option>
+                </select></br></br>
+
+                <p class="text mb-2">Expiry <span class="errorInRed">*</span> </p>
+                <input class="form-input" type="text" id="expiry" placeholder="MM/YYYY" /> </br></br>
+
+                <p class="text mb-2">CVV/CVC <span class="errorInRed">*</span> </p>
+                <input class="form-input" type="number" minlength="3" maxlength="3" id="cvv" placeholder="***"  /> </br>
+            </div>
+            <button id="makepurchase" class="btn"><span id="button_text">CONFIRM ORDER</span></button>
+        </div>
+    </div>
+
+
+
+<script src="cookies.js"></script>
+<script>
+    if( getCookie("ekart_key") == undefined ){
+        location.href = "login.html";
+    }
+
+    document.getElementById("username").innerText = getCookie("username");
+
+
+    var requestBody = {
+        "customerName" : getCookie("username"),
+        "sessionkey" : getCookie("ekart_key")
+    }
+
+    $.ajax({
+        url : "http://localhost:4001/cart/cards/all",
+        data : JSON.stringify( requestBody ),
+        type : 'post',
+        dataType : 'json',
+        contentType: "application/json",
+        cache : false,
+        success: function(response){
+            console.log(response);
+
+            if(response.status === "success"){
+                console.log("inside add card function");
+                var container = document.getElementById("cardsContainer");
+
+                for( var i = 0; i < response.data.length ; i++){
+
+                    var card = ' <label>' +
+                        '<input type="radio" name="cardselection" value="'+response.data[i].cardnumber+'" />'+maskString( response.data[i].cardnumber , 4 , 12 , "X") +
+                        '</label> <br/><br/>';
+
+                    container.innerHTML += card;
+                }
+
+            } else {
+                alert( response.message  );
+            }
+        }
+    });
+
+
+    function maskString( str , startLength , endLength, replaceCharacter){
+        var tmp = "";
+
+        for( var i = 0; i < str.length; i++ ){
+
+            if( i >= (startLength) && i < endLength){
+                tmp = tmp + replaceCharacter;
+            } else {
+                tmp = tmp + str[i];
+            }
+        }
+        return tmp;
+    }
+
+    function newCard(value){
+        if(value === "TRUE")
+            document.getElementById("newCard").style.display = "block";
+        else
+            document.getElementById("newCard").style.display = "none";
+    }
+
+    document.getElementById("makepurchase").addEventListener('click', function(){
+
+        var cardoptions = document.getElementsByName("cardselection");
+        console.log("cards in db");
+        console.log(cardoptions);
+
+        var selected  = "";
+
+        for( var i = 0; i < cardoptions.length; i++ ){
+            if( cardoptions[i].checked ){
+                selected = cardoptions[i].value;
+                console.log(selected)
+            }
+        }
+
+        if(selected === "newCard"){
+
+            if(document.getElementById("name").value.length === 0){
+                document.getElementById("error").innerText = "Please enter cardholder name";
+                document.getElementById("name").focus();
+                return;
+            }
+
+            if(document.getElementById("cardnumber").value.length === 0){
+                document.getElementById("error").innerText = "Please enter card number";
+                document.getElementById("cardnumber").focus();
+                return;
+            } else if(document.getElementById("cardnumber").value.length < 16){
+                document.getElementById("error").innerText = "Card number should have 16 elements";
+                document.getElementById("cardnumber").focus();
+                return;
+            }
+            if(document.getElementById("cardnumber").value.length > 16){
+                document.getElementById("error").innerText = "Card number should have 16 elements";
+                document.getElementById("cardnumber").focus();
+                return;
+            }
+
+            if(document.getElementById("expiry").value.length === 0){
+                document.getElementById("error").innerText = "Please enter card expiry";
+                document.getElementById("expiry").focus();
+                return;
+            }
+
+            if(document.getElementById("cvv").value.length === 0){
+                document.getElementById("error").innerText = "Please enter card cvv ";
+                document.getElementById("cvv").focus();
+                return;
+            }else if(document.getElementById("cvv").value.length < 3){
+                document.getElementById("error").innerText = "Card CVV is invalid";
+                document.getElementById("cvv").focus();
+                return;
+            }
+            if(document.getElementById("cvv").value.length > 3){
+                document.getElementById("error").innerText = "Card CVV is invalid";
+                document.getElementById("cvv").focus();
+                return;}
+
+
+
+            var requestBody = {
+                "customerName" : getCookie("username"),
+                "sessionkey" : getCookie("ekart_key"),
+                "data" : {
+                    "username" : getCookie("username"),
+                    "name" : document.getElementById("name").value,
+                    "cardnumber" : document.getElementById("cardnumber").value,
+                    "expiry" : document.getElementById("expiry").value,
+                    "cvv" : document.getElementById("cvv").value,
+                    "type" : document.getElementById("type").value
+                }
+            }
+            console.log(requestBody);
+
+            $.ajax({
+                url: "http://localhost:4001/cart/card/add",
+                data: JSON.stringify(requestBody),
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                cache: false,
+                success: function (response) {
+                    if(response.status === "success"){
+                        console.log(response);
+                        placeOrder(document.getElementById("cardnumber").value);
+
+                    }  else {
+                        alert( response.message );
+                    }
+                }
+            });
+        } else {
+            placeOrder( selected );
+        }
+    });
+
+
+
+    function placeOrder(cardnumber){
+
+        var requestBody = {
+            "customerName" : getCookie("username"),
+            "sessionkey" : getCookie("ekart_key"),
+            "data" : {
+                "username" : getCookie("username"),
+                "productCount" : getCookie("productcount"),
+                "cardnumber" : cardnumber,
+                "totalcost" : getCookie("totalamount")
+            }
+        }
+
+        console.log(requestBody);
+
+        $.ajax({
+            url: "http://localhost:4001/order/save",
+            data: JSON.stringify(requestBody),
+            type: 'post',
+            dataType: 'json',
+            contentType: "application/json",
+            cache: false,
+            success: function (response) {
+                if(response.status === "success"){
+
+                    $('.btn').addClass("loader");
+                    document.getElementById("button_text").style.visibility = "hidden";
+
+                    setTimeout(function (){
+                        $('.btn').addClass("finished");
+                        $('.btn').removeClass("loader");
+                    },3500);
+                    setTimeout(function (){
+                        $('.btn').removeClass("finished");
+                        $('.btn').removeClass("loader");
+                        document.getElementById("button_text").style.visibility = "initial";
+                        alert("Thanks for shopping with EKART. Continue Shopping !!");
+                        location.href = "home.html";
+                    },6500);
+
+                    console.log(response)
+
+                }  else {
+                    alert( response.message );
+                }
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

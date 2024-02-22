@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>EKART</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kumbh Sans', sans-serif;
+
+        }
+
+        .navbar {
+            background: black;
+
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar_container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        #navbar_logo {
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #51E1ED 0%, #286783 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .navbar_menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar_item {
+            height: 80px;
+        }
+
+        .navbar_links {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+        .navbar_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background: #f77062;
+            color: #fff;
+        }
+
+        .button:hover {
+            background: #4837ff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar_links:hover {
+            color: #f77062;
+            transition: all 0.3s ease;
+        }
+        .login_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            /*width: 100%;*/
+        }
+
+
+
+        .login_form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: whitesmoke;
+            border-radius: 30px;
+            left: 33%;
+            margin: 100px;
+            position:absolute;
+            padding: 50px;
+            box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+        }
+        .login_form input{
+
+            border-radius: 10px;
+            border: 2px solid rgba(107, 172, 255, 0.4);
+            background: whitesmoke;
+            padding: 15px 20px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar_container">
+        <a href="index.html" id="navbar_logo">EKART</a>
+        <ul class="navbar_menu">
+
+            <li class="navbar_item">
+                <a href="index.html" class="navbar_links">Home</a>
+            </li>
+
+            <li class="navbar_btn">
+                <a href="registration.html" class="button">SignUP</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="main" style="background: white;">
+    <div class="login_form" id ="login_container" >
+
+        <h2 style="margin-bottom: 30px">LOGIN</h2>
+        <div id="login_form">
+            <input type="text" id="username"  placeholder="Enter your email" required="required"/> <br/><br/>
+            <input type="password" id="password"  style="margin-bottom: 30px;" placeholder="Enter your password" required="required"/> <br/><br/>
+        </div>
+        <button class="button_login" onclick="login()" id="login" style="padding: 10px 30px; cursor: pointer;background-color: #000; color: #fff;border: none;
+        transition: all 0.3s ease;border-radius: 15px;">LOGIN</button>
+        <br/><br/>
+        <span id="errorAndMore" style="color: red"></span>
+
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="cookies.js"></script>
+
+<script>
+
+    function login(){
+
+
+        if(document.getElementById("username").value.length < 5 ){
+            document.getElementById("errorAndMore").innerText = "Invalid Email";
+            document.getElementById("username").focus();
+            return;
+        }
+
+
+        if(document.getElementById("password").value.length < 6 ){
+            document.getElementById("errorAndMore").innerText = "Invalid Password";
+            document.getElementById("password").focus();
+            return;
+        }
+
+        var requestBody= {
+            "email" : document.getElementById("username").value,
+            "password" : document.getElementById("password").value,
+        }
+
+        $.ajax({
+            url : "http://localhost:4001/customer/login",
+            data : JSON.stringify( requestBody ),
+            type : 'post',
+            dataType : 'json',
+            contentType: "application/json",
+            cache : false,
+            success: function(response){
+                console.log(response);
+                if(response.status === "success"){
+                    setCookie("username",response.data.customerName,365);
+                    setCookie("ekart_key",response.data.key,365);
+                    location.href="home.html"
+                    console.log(response)
+                } else {
+                    document.getElementById("errorAndMore").innerText = response.message;
+                }
+
+            }
+        });
+    }
+
+
+
+</script>
+
+</body>
+</html>

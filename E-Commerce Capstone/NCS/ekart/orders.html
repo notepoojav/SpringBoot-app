@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kumbh Sans', sans-serif;
+
+        }
+
+        body{
+            background: white;
+        }
+
+        .navbar {
+            background: black;
+
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 0;
+        }
+
+        .navbar_container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        #navbar_logo {
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #51E1ED 0%, #286783 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .navbar_menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar_item {
+            height: 80px;
+        }
+
+        .navbar_links {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+        .navbar_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background: #f77062;
+            color: #fff;
+        }
+
+        .button:hover {
+            background: #4837ff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar_links:hover {
+            color: #f77062;
+            transition: all 0.3s ease;
+        }
+        table {
+
+            border-collapse: collapse;
+            width: 80%;
+            padding-top: 100px;
+            margin-left:auto;
+            margin-right:auto;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+        }
+
+        thead{
+            background-color: #CAD5E2;
+            color: white;
+            text-align: left;
+        }
+
+        td, th {
+            text-align: left;
+            padding: 8px;
+            padding : 12px 15px;
+        }
+
+        tr:nth-child(even){background-color: #f3f3f3}
+
+        tr{
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:last-of-type{
+            border-bottom: 2px solid #CAD5E2;
+        }
+        tr:hover{
+            font-weight: bold;
+
+        }
+    </style>
+    </head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar_container">
+        <a href="/ekart/index.html" id="navbar_logo">EKART</a>
+        <ul class="navbar_menu">
+            <li class="navbar_item">
+                <a href="profile.html" id="active_user"class="navbar_links" >EKART</a>
+            </li>
+            <li class="navbar_btn">
+                <a style="cursor:pointer;" onclick="logout()" class="button">SignOut</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="orderContainer">
+    <div class="order_list" style="text-align: center"></br>
+        <table>
+            <thead>
+            <tr>
+                <th>SL.No</th>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Amount</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+        <div style="height:45px;width: 80%;margin-bottom:5px;margin-top: 5px;background:#CAD5E2; margin-left:auto; margin-right:auto;text-align: left;padding-left: 5px ">
+            <span> Item count : <b style="margin-top:5px" id="productCount"></b></span></br>
+            <span> Grand Total : $<b id="totalAmount"></b></span>
+            <button onclick="checkout()" style="cursor:pointer; border-radius:5px; background:#6AC47E; color:black; margin-bottom: 5px; float: right; margin-right: 10px; padding: 2px">CHECKOUT SECURELY</button></br></br>
+            <span class="error" id = "error" style="color: indianred; font-style: italic"></span>
+        </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="cookies.js"></script>
+<script>
+
+    if(getCookie("ekart_key") == undefined){
+        location.href = "login.html";
+    }
+
+    document.getElementById("active_user").innerText = getCookie("username");
+
+    var requestBody = {
+        "customerName" : getCookie("username"),
+        "sessionkey" : getCookie("ekart_key")
+    }
+
+    var productcount = 0;
+    var totalAmount = 0;
+
+    $.ajax({
+        url: "http://localhost:4001/cart/orders",
+        data: JSON.stringify(requestBody),
+        type: 'post',
+        dataType: 'json',
+        contentType: "application/json",
+        cache: false,
+        success: function (response) {
+            console.log(response);
+
+            var container = document.getElementsByTagName("tbody")[0];
+
+            for(var i=0; i<response.data.length ; i++){
+                var table_row = '<tr>' +
+                    '<td>'+(i+1)+'</td>'+
+                    '<td>'+(response.data[i].productId)+'</td>'+
+                    '<td>'+(response.data[i].productName)+'</td>'+
+                    '<td>'+(response.data[i].quantity)+'</td>'+
+                    '<td>'+(response.data[i].price)+'</td>'+
+                    '<td>'+(response.data[i].amount)+'</td>'+
+                    '</tr>';
+
+                container.innerHTML += table_row;
+
+                productcount += response.data[i].quantity;
+                totalAmount += response.data[i].amount;
+            }
+
+            document.getElementById("productCount").innerText = productcount ;
+            document.getElementById("totalAmount").innerText = totalAmount;
+            setCookie("productcount",productcount);
+            setCookie("totalamount",totalAmount);
+
+        },
+        error: function () {
+            alert(response.message);
+        }
+    });
+
+    function checkout(){
+
+        if(productcount == 0){
+            document.getElementById("error").innerText = "Cart is currently EMPTY, Can't proceed to payment";
+            document.getElementById("error").focus();
+        }
+        else{
+            location.href = "payment.html";
+        }
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

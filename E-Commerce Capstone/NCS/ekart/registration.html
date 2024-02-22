@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>EKART</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kumbh Sans', sans-serif;
+        }
+
+        .navbar {
+            background: black;
+
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar_container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+
+        #navbar_logo {
+            background-color: #ff8177;
+            background-image: linear-gradient(to top, #51E1ED 0%, #286783 100%);
+            background-size: 100%;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+        .navbar_menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+        }
+
+        .navbar_item {
+            height: 80px;
+        }
+
+        .navbar_links {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0 1rem;
+            height: 100%;
+        }
+        .navbar_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background: #f77062;
+            color: #fff;
+        }
+
+        .button:hover {
+            background: #4837ff;
+            transition: all 0.3s ease;
+        }
+
+        .navbar_links:hover {
+            color: #f77062;
+            transition: all 0.3s ease;
+        }
+
+        .reg_form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex: 1;
+            background: whitesmoke;
+            border-radius: 30px;
+            width: 50%;
+            left: 20%;
+            margin: 100px;
+            position:absolute;
+            padding: 50px;
+            box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .input input{
+            width: 330px;
+            height: 35px;
+            border-radius: 10px;
+            border: 2px solid rgba(107, 172, 255, 0.4);
+            /*padding-left: 12px;*/
+            /*padding-left: 12px;*/
+            background: whitesmoke;
+            padding: 10px 20px;
+        }
+
+        .reg_button{
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+
+        }
+
+        #toggle{
+            position: absolute;
+            top: 40%;
+            right: 250px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: url("https://static.thenounproject.com/png/777494-200.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        #toggle.hide{
+            background: url("data:image/png;base64,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");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar_container">
+        <a href="index.html" id="navbar_logo">EKART</a>
+        <ul class="navbar_menu">
+            <li class="navbar_item">
+                <a href="index.html" class="navbar_links">Home</a>
+            </li>
+            <li class="navbar_btn">
+                <a href="login.html" class="button">Log in</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="main" style="background: black;">
+    <div class="reg_form" id = "registration_container" >
+
+        <h2 style="margin-bottom: 30px">REGISTER</h2>
+        <div id="registration_form" class="input" >
+            <input type="text" id="username"  placeholder="username" required/> <br/><br/>
+            <input type="password" id="password"   placeholder="Password" required/><br/><br/>
+            <div id="toggle" onclick="showHide()"></div>
+            <input type="text" id="email"  placeholder="Email" required/> <br/><br/>
+            <input type="text" id="mobile"   placeholder="Mobile" required/> <br/><br/>
+        </div>
+        <button class="reg_button" onclick="register()" id="login" >Register</button>
+        <br/><br/>
+        <span id="error" style="color: red"></span>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    const showpasswrod = document.getElementById("password");
+    const toggle = document.getElementById("toggle");
+
+    function showHide(){
+        if(showpasswrod.type === 'password'){
+            showpasswrod.setAttribute('type','text');
+            toggle.classList.add('hide');
+        }
+        else{
+            showpasswrod.setAttribute('type','password');
+            toggle.classList.remove('hide');
+        }
+    }
+    function register(){
+
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var email = document.getElementById("email");
+        var mobile = document.getElementById("mobile");
+
+        if(username.value.length < 5 ){
+            document.getElementById("error").innerText = "Invalid Username";
+            username.focus();
+            return;
+        }
+
+
+        if(password.value.length < 6 ){
+            document.getElementById("error").innerText = "Invalid Password. (min 6 characters)";
+            password.focus();
+            return;
+        }
+        if(password.value === "password"){
+            document.getElementById("error").innerText = "Password cannot be password";
+            password.focus();
+            return;
+        }
+        if(password.value.search(/[0-9]/) == -1 ){
+            document.getElementById("error").innerText = "Password must contain 1 numerical value";
+            password.focus();
+            return;
+        }
+        if(password.value.search(/[A-Z]/) == -1 ){
+            document.getElementById("error").innerText = "Password must contain 1 uppercase value";
+            password.focus();
+            return;
+        }
+        if(password.value.search(/[!\@\$\#]/) == -1 ){
+            document.getElementById("error").innerText = "Password must contain 1 special character";
+            password.focus();
+            return;
+        }
+
+        if(email.value.length < 10){
+            document.getElementById("error").innerText = "Invalid Email";
+            email.focus();
+            return;
+        }
+
+        if(mobile.value.length < 8 ){
+            document.getElementById("error").innerText = "Invalid Mobile";
+            mobile.focus();
+            return;
+        }
+
+
+        var requestBody= {
+            "customerName" : document.getElementById("username").value,
+            "password" : document.getElementById("password").value,
+            "email" : document.getElementById("email").value,
+            "mobile" : document.getElementById("mobile").value
+        }
+
+        $.ajax({
+            url : "http://localhost:4001/customer/register",
+            data : JSON.stringify( requestBody ),
+            type : 'post',
+            dataType : 'json',
+            contentType: "application/json",
+            cache : false,
+            success: function(response){
+                console.log(response);
+                console.log(response.status)
+
+                if(response.status === "success"){
+                    location.href = "login.html";
+                } else {
+                    document.getElementById("error").innerText = response.message;
+                }
+
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
